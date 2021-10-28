@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Staff Detail
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h4 class="text-primary text-center">
+			Staff Detail</h4>
+		<a class="btn btn-outline-primary" href="{{ path('staff_add') }}">Add New Staff</a>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+                    <th>Date Of Birthday</th>
+					<th>National</th>
+					<th>Number Phone</th>
+					<th>Admin</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td>{{ staff.id }}</td>
+						<td>{{ staff.name }}</td>
+						<td>{{ staff.dob|date('d/m/Y') }}</td>
+						<td>{{ staff.nationality }}</td>
+                        <td>{{ staff.phone }}</td>
+						<td> 
+						<a href="{{ path ('admin_detail', {'id': staff.admstaff.id}) }}">{{ staff.admstaff.name }}</a>
+						
+						
+						</td>
+						
+						<td>
+							<a class="btn btn-info" href="{{ path('staff_edit', {'id': staff.id}) }}">EDIT</a>
+							<a class="btn btn-danger" href="{{ path('staff_delete', {'id': staff.id}) }}" onclick="return confirm('Em xoá nha cưng ? Đừng quạo em')">DELETE</a>
+						</td>
+					</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+{% endblock %}

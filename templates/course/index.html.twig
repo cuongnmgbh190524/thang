@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Course List
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h4 class="text-primary text-center">
+			Course List</h4>
+		<a class="btn btn-outline-primary" href="{{ path('course_add') }}">Add New Course</a>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Display</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for course in courses %}
+					<tr>
+						<td>{{ course.id }}</td>
+						<td>{{ course.name }}</td>
+						<td>{{ course.category }}</td>
+						<td>{{ course.display }}</td>
+
+						<td>
+							<a class="btn btn-primary" href="{{ path('course_detail', {'id': course.id}) }}">DETAIL</a>
+							{% if is_granted("ROLE_ADMIN") %}
+								<a class="btn btn-info" href="{{ path('course_edit', {'id': course.id}) }}">EDIT</a>
+								<a class="btn btn-danger" href="{{ path('course_delete', {'id': course.id}) }}" onclick="return confirm('Em xoá nha cưng ? Đừng quạo em')">DELETE</a>
+							{% endif %}
+
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+
+		</table>
+
+	</div>
+{% endblock %}
