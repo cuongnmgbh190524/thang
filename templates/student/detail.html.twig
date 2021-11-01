@@ -8,39 +8,40 @@
 	<div class="container">
 		<h4 class="text-primary text-center">
 			Student Detail</h4>
-		<a class="btn btn-outline-primary" href="{{ path('student_add') }}">Add New Student</a>
-
+		{% if is_granted("ROLE_ADMIN") %}
+			<a class="btn btn-outline-primary" href="{{ path('student_add') }}">Add New Student</a>
+		{% endif %}
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Name</th>
-                    <th>Age</th>
+					<th>Age</th>
 					<th>Phone</th>
 					<th>Email</th>
-					<th>Course</th>
-					<th>Actions</th>
+					<th>YearofBirth</th>
+
 				</tr>
 			</thead>
 			<tbody>
-					<tr>
-						<td>{{ student.id }}</td>
-						<td>{{ student.name }}</td>
-						<td>{{ student.age }}</td>
-						<td>{{ student.phone }}</td>	
-                        <td>{{ student.email }}</td>
-						<td>{% for a in student.courses %}
-							<a href="{{ path('student_detail', {'id': a.id}) }}">
-								{{a.name}}
-							</a>
-							<br>
-						{% endfor %}</td>
-						
-						<td>
+				<tr>
+					<td>{{ student.id }}</td>
+					<td>{{ student.name }}</td>
+					<td>{{ student.age }}</td>
+					<td>{{ student.phone }}</td>
+					<td>{{ student.email }}</td>
+					<td>{{ year-student.age}}<td>
+					
+					
+
+					<td>
+						{% if is_granted("ROLE_ADMIN") %}
+
 							<a class="btn btn-info" href="{{ path('student_edit', {'id': student.id}) }}">EDIT</a>
 							<a class="btn btn-danger" href="{{ path('student_delete', {'id': student.id}) }}" onclick="return confirm('Em xoá nha cưng ? Đừng quạo em')">DELETE</a>
-						</td>
-					</tr>
+						{% endif %}
+					</td>
+				</tr>
 			</tbody>
 
 		</table>

@@ -8,14 +8,15 @@
 	<div class="container">
 		<h4 class="text-primary text-center">
 			Staff List</h4>
-		<a class="btn btn-outline-primary" href="{{ path('staff_add') }}">Add New Staff</a>
-
+		{% if is_granted("ROLE_ADMIN") %}
+			<a class="btn btn-outline-primary" href="{{ path('staff_add') }}">Add New Staff</a>
+		{% endif %}
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Name</th>
-                    <th>Date Of Birthday</th>
+					<th>Date Of Birthday</th>
 					<th>National</th>
 					<th>Number Phone</th>
 					<th>Actions</th>
@@ -28,12 +29,15 @@
 						<td>{{ staff.name }}</td>
 						<td>{{ staff.dob|date('d/m/Y') }}</td>
 						<td>{{ staff.nationality }}</td>
-                        <td>{{ staff.phone }}</td>
-						
+						<td>{{ staff.phone }}</td>
+
 						<td>
 							<a class="btn btn-primary" href="{{ path('staff_detail', {'id': staff.id}) }}">DETAIL</a>
-							<a class="btn btn-info" href="{{ path('staff_edit', {'id': staff.id}) }}">EDIT</a>
-							<a class="btn btn-danger" href="{{ path('staff_delete', {'id': staff.id}) }}" onclick="return confirm('Em xoá nha cưng ? Đừng quạo em')">DELETE</a>
+							{% if is_granted("ROLE_ADMIN") %}
+
+								<a class="btn btn-info" href="{{ path('staff_edit', {'id': staff.id}) }}">EDIT</a>
+								<a class="btn btn-danger" href="{{ path('staff_delete', {'id': staff.id}) }}" onclick="return confirm('Em xoá nha cưng ? Đừng quạo em')">DELETE</a>
+							{% endif %}
 						</td>
 					</tr>
 				{% endfor %}

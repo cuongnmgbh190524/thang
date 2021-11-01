@@ -35,8 +35,14 @@
 						</td>
 						<td>
 							<a class="btn btn-primary" href="{{ path('admin_detail', {'id': admin.id}) }}">DETAIL</a>
+							{% if is_granted("ROLE_ADMIN") %}
+							
 							<a class="btn btn-info" href="{{ path('admin_edit', {'id': admin.id}) }}">EDIT</a>
 							<a class="btn btn-danger" href="{{ path('admin_delete', {'id': admin.id}) }}" onclick="return confirm('Em xoá nha cưng ? Đừng quạo em')">DELETE</a>
+							{% endif %}
+							
+
+							
 						</td>
 					</tr>
 				{% endfor %}

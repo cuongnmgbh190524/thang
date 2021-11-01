@@ -22,7 +22,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setUsername("user");
         $user->setPassword($this->hasher->hashPassword($user,"123456"));
-        $user->setRoles(["ROLE_USER"]);
+        $user->setRoles(["ROLE_STUDENT"]);
         $manager->persist($user);
 
         //tạo tài khoản với role Manager

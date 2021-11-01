@@ -3,11 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Student;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Constraints\DateTime as ConstraintsDateTime;
 
 class StudentType extends AbstractType
 {
@@ -34,6 +37,17 @@ class StudentType extends AbstractType
             'label' => "Student Email",
             'required' => true
             ])
+        ->add('DateofBirth',DateType::class,
+        [
+            'label'=> "DateofBirth",
+            'required'=> true,
+            'widget'=> 'single_text'
+        ])
+        ->add('year', IntegerType::class,
+        [
+            'label' => "Year",
+            'required' => true,
+        ])
         ;
     }
 

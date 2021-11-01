@@ -78,7 +78,7 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_STAFF")
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/staff/edit/{id}", name="staff_edit")
      */
     public function staffEditAction(Request $request, $id)

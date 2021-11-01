@@ -15,20 +15,27 @@ class StudentController extends AbstractController
     #[Route('/student', name: 'student_index')]
     public function studentIndexAction()
     {
+        $year= date("Y-m-d ");
+        $a = explode("-",$year);
+        $b = $a[0];
         $students = $this->getDoctrine()->getRepository(Student::class)->findAll();
-        return $this->render('student/index.html.twig', ['students' => $students]);
+        return $this->render('student/index.html.twig', ['students' => $students,'year'=> $b]);
     }
     /**
      * @Route("/student/detail/{id}", name="student_detail")
      */
     public function studentDetailAction($id)
     {
+        $year= date("Y-m-d ");
+        $a = explode("-",$year);
+        $b = $a[0];
+         
         $student = $this->getDoctrine()->getRepository(Student::class)->find($id);
         if ($student == null) {
             $this->addFlash('error', 'student is not existed');
             return $this->redirectToRoute('student_index');
         } else {
-            return $this->render('student/detail.html.twig', ['student' => $student]);
+            return $this->render('student/detail.html.twig', ['student' => $student,'year'=> $b ]);
         }
     }
     /**

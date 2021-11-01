@@ -28,6 +28,11 @@ class Student
      * @ORM\Column(type="integer")
      */
     private $age;
+    
+     /**
+     * @ORM\Column(type="integer")
+     */
+    private $year;
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -43,6 +48,11 @@ class Student
      * @ORM\ManyToMany(targetEntity=Course::class, mappedBy="view")
      */
     private $courses;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $DateofBirth;
 
     public function __construct()
     {
@@ -74,6 +84,18 @@ class Student
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getYear(): ?int
+    {
+        return $this->year;
+    }
+
+    public function setYear(int $year): self
+    {
+        $this->age = $year;
 
         return $this;
     }
@@ -125,6 +147,18 @@ class Student
         if ($this->courses->removeElement($course)) {
             $course->removeView($this);
         }
+
+        return $this;
+    }
+
+    public function getDateofBirth(): ?\DateTimeInterface
+    {
+        return $this->DateofBirth;
+    }
+
+    public function setDateofBirth(?\DateTimeInterface $DateofBirth): self
+    {
+        $this->DateofBirth = $DateofBirth;
 
         return $this;
     }
